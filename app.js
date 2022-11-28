@@ -8,36 +8,13 @@ myApp.config(function ($stateProvider, $httpProvider) {
         name: "login", // nome do estado, estando ativo
         url: "", // nesta url sendo ativa
         templateUrl: "views/login.html", // o html que vai ser renderizado
-        controller: "LoginCtrl", // ultilizando o controller , onde fica toda nossa logica
-        onEnter: checkRedirect
+        controller: "LoginCtrl" // ultilizando o controller , onde fica toda nossa logica
     });
 
     $stateProvider.state({
         name: "home",
         url: "/home",
         templateUrl: "views/home.html",
-        controller: "HomeCtrl",
-        onEnter: isAuthorized
+        controller: "HomeCtrl"
     });
 });
-
-const isAuthorized = ($state, $rootScope) => {
-    const isLogged = localStorage.getItem("token");
-
-    if (!isLogged) {
-      $state.go("login");
-      return;
-    }
-
-    $rootScope.isLogged = true;
-};
-
-const checkRedirect = ($state, $rootScope) => {
-    const isLogged = localStorage.getItem("token");
-
-    if (!isLogged) {
-        return;
-    }
-
-    $state.go("home");
-}

@@ -1,0 +1,28 @@
+<div class="container">
+    <div style="width: 100%; margin: 20px; padding: 0 10px; border: 1px solid; border-radius: 8px;"  ng-repeat="match in matchs">
+        <span style=" width:100%; margin-top: 20px; text-align: center; ">Partida ID - {{match.id}} - Data: {{match.date | date:'dd/MM/yyyy'}}</span>
+        <hr>
+        <div class="ds-flex" style="margin-top: 10px;">                  
+                <div>
+                    <div ng-if="!match.participants.length">
+                        Sem Participantes no momento!
+                    </div>
+                    <table class="table" ng-if="match.participants.length" >
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Data Nascimento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="participant in match.participants" >
+                                <td>{{participant.name}}</td>
+                                <td>{{participant.born | date:'dd/MM/yyyy'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
