@@ -1,4 +1,4 @@
-myApp.factory('BearerTokenInterceptor', function ($window, $q, $state) {
+myApp.factory('BearerTokenInterceptor', function ($window, $q, $state, $rootScope) {
     return {
         request: function(config) {
             config.headers = config.headers || {};
@@ -15,7 +15,7 @@ myApp.factory('BearerTokenInterceptor', function ($window, $q, $state) {
         responseError: function(response) {
             if (response.status === 401) {
                 $state.go('login')
-                console.log(response.status === 401);
+                $rootScope.isLogged = false;
             }
         }
     };
