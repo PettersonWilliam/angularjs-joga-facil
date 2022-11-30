@@ -1,6 +1,6 @@
 <div class="container">
     <div >
-        <button class="btn btn-secondary" style="margin-left: 20px; border-radius:10px;">Adicionar Partida</button>
+        <button class="btn btn-secondary" style="margin-left: 20px; border-radius:10px; margin-top: 10px;"ui-sref="matchForm">Adicionar Partida</button>
     </div>
    
     <div style="width: 100%; margin: 20px; padding: 0 10px; border: 1px solid; border-radius: 8px;"  ng-repeat="match in matchs">
@@ -16,7 +16,7 @@
 
             <div class="d-flex gap-4 " ng-if="match.status ==='OPEN'">
                 <i class="fa-solid fa-trash" ng-click="deleteMatch(match.id)" style="cursor:pointer;"></i>
-                <i class="fa-solid fa-pencil" ui-sref="matchUpdate({ matchId: match.id })"></i>
+                <i class="fa-solid fa-pencil" ui-sref="matchForm({ matchId: match.id })"></i>
             </div>
             <div class="dropdown" ng-if="match.status !== 'FINISHED'">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

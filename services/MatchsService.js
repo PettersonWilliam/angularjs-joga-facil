@@ -14,12 +14,16 @@ myApp.service("MatchsService", function($http) {
     const updateStatus = ({ data, id }) => {
         return $http.put(`http://localhost:3000/match/status/${id}`, data);
     }
+    const createMatch = data => {
+        console.log(data);
+        return $http.post('http://localhost:3000/match', data);
+    }
     return {
         list,
         deleteMatch,
         edit,
         find,
-        updateStatus
-
+        updateStatus,
+        createMatch
     }
 });

@@ -15,11 +15,25 @@ myApp.controller('MatchsCtrl', ['$scope',  '$stateParams', '$state', '$timeout',
         MatchsService.edit(options).then(response => {
             $state.go('home');
         }).catch(error => {
-            console.log(error);
             alert('Erro ao atualizar partida.');
         });
     };
 
+    const createMatch = () => {
+
+        const data = {
+            date: $scope.match.date,
+            started_at: $scope.match.started_at,
+            end_at: $scope.match.end_at,
+            team_amount: $scope.match.team_amount
+        };
+
+        MatchsService.createMatch(data).then(response => {
+            $state.go('home');
+        }).catch(error => {
+            alert('Erro ao Criar Partida');
+        })
+    }
 
     const getDateHour = date => {
         const today = new Date(date);
@@ -52,6 +66,8 @@ myApp.controller('MatchsCtrl', ['$scope',  '$stateParams', '$state', '$timeout',
 
         if (matchId) {
             updateMatch();
+        } else {
+            createMatch();
         }
      }
     

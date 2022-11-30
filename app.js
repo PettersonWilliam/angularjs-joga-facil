@@ -21,9 +21,9 @@ myApp.config(function ($stateProvider, $httpProvider) {
     });
 
     $stateProvider.state({
-        name: "matchUpdate",
+        name: "matchForm",
         url: "/match/?{matchId}",
-        templateUrl: "views/matchUpdate.html",
+        templateUrl: "views/matchForm.html",
         controller: "MatchsCtrl",
         onEnter: isAuthorized
     });
