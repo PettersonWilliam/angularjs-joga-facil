@@ -1,19 +1,33 @@
 <div class="container">
+    <div >
+        <button class="btn btn-secondary" style="margin-left: 20px; border-radius:10px;">Adicionar Partida</button>
+    </div>
+   
     <div style="width: 100%; margin: 20px; padding: 0 10px; border: 1px solid; border-radius: 8px;"  ng-repeat="match in matchs">
         <div class="d-flex justify-content-between w-100 mt-1">
             <div>
                 <span>
-                    Partida ID - {{match.id}} - Data: {{match.date | date:'dd/MM/yyyy'}}
+                    Partida ID - {{match.id}} - Data: {{match.date | date:'dd/MM/yyyy'}} - Início: {{match.started_at | date: 'HH:mm'}} - Fim: {{match.end_at | date: 'HH:mm'}}
                 </span>
                 <span style="margin-left: 150px">
-                    Status: {{match.status}}
+                    Status: {{ match.display_status }}
                 </span>
             </div>
 
-            <div class="d-flex gap-4" ng-if="match.status ==='OPEN'">
+            <div class="d-flex gap-4 " ng-if="match.status ==='OPEN'">
                 <i class="fa-solid fa-trash" ng-click="deleteMatch(match.id)" style="cursor:pointer;"></i>
                 <i class="fa-solid fa-pencil" ui-sref="matchUpdate({ matchId: match.id })"></i>
             </div>
+            <div class="dropdown" ng-if="match.status !== 'FINISHED'">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Status
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" ng-click="updateStatus('OPEN', match.id)" ng-if="match.status !== 'OPEN'">Aberta</a></li>
+                  <li><a class="dropdown-item" ng-click="updateStatus('PROGRESS', match.id)"ng-if="match.status !== 'PROGRESS'">Em Andamento</a></li>
+                  <li><a class="dropdown-item" ng-click="updateStatus('FINISHED', match.id)">Finalizada</a></li>
+                </ul>
+              </div>
         </div>
         <hr>
         <div class="ds-flex" style="margin-top: 10px;">      

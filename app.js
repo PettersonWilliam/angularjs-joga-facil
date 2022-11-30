@@ -22,7 +22,7 @@ myApp.config(function ($stateProvider, $httpProvider) {
 
     $stateProvider.state({
         name: "matchUpdate",
-        url: "/match/{matchId}",
+        url: "/match/?{matchId}",
         templateUrl: "views/matchUpdate.html",
         controller: "MatchsCtrl",
         onEnter: isAuthorized

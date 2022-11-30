@@ -1,7 +1,28 @@
 <div class="container">
-    <h1></h1>
     <div class="flex">
-        <input class="col-8" type="text" ng-model="positionName" placeholder="Nome">
-        <button ng-click="submit()">Salvar</button>
+        <div ng-show="!loading">
+            <div>
+                <p>Data da Partida</p>
+                <input class="col-8" type="date" ng-model="match.date">
+            </div>
+           
+            <div>
+                <p style="margin-top:10px;">Início da Partida</p>
+                <div>
+                    <input class="col-8" type="time" ng-model="match.started_at">
+                </div>
+            </div>
+            
+            <div>
+                <div>
+                    <p style="margin-top:10px;">Fim da Partida</p>
+                </div>
+                <input class="col-8" type="time" ng-model="match.end_at">
+            </div>
+            <div>
+                <button style="margin-top: 20px; "ng-click="submit()">Salvar</button>
+            </div>
+        </div>
+       
     </div>
 </div>
