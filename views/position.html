@@ -1,0 +1,29 @@
+<div class="container">
+   
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <button type="button" class="btn btn-primary" style="border-radius:10px; margin-top: 10px;">Adicionar Posições</button>
+                <thead>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody>
+                   <div class="row">
+                    <div class="col-md-12">
+                        <tr ng-repeat="position in positionsName">
+                            <td>{{ position.id }}</td>
+                            <td>{{ position.name }}</td>
+                            <td>
+                                <i class="fa-solid fa-trash text-end" ng-click="deletePosition(position.id)"></i>
+                                <i class="fa-solid fa-pencil text-end" ui-sref="positionForm({ positionId: position.id })"></i>
+                            </td>
+                        </tr>
+                    </div>
+                   </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

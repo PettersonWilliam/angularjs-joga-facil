@@ -1,36 +1,34 @@
 <div class="container">
     <div >
-        <button class="btn btn-secondary" style="margin-left: 20px; border-radius:10px; margin-top: 10px;"ui-sref="matchForm">Adicionar Partida</button>
+        <button class="btn btn-primary" style="border-radius:10px; margin-top: 10px;"ui-sref="matchForm">Adicionar Partida</button>
     </div>
    
-    <div style="width: 100%; margin: 20px; padding: 0 10px; border: 1px solid; border-radius: 8px;"  ng-repeat="match in matchs">
-        <div class="d-flex justify-content-between w-100 mt-1">
-            <div>
+    <div style="width: 100%; margin-top: 20px; padding: 0 10px; border: 1px solid; border-radius: 8px;"  ng-repeat="match in matchs">
+        <div class="w-100 pt-2 pb-2 align-items-center" style="border-bottom: 1px solid; display: grid; grid-template-columns: 9fr 5fr 1fr 1fr 1fr; gap: 10px; padding: 0 10px;">
+        
                 <span>
                     Partida ID - {{match.id}} - Data: {{match.date | date:'dd/MM/yyyy'}} - Início: {{match.started_at | date: 'HH:mm'}} - Fim: {{match.end_at | date: 'HH:mm'}}
                 </span>
-                <span style="margin-left: 150px">
+                <span>
                     Status: {{ match.display_status }}
                 </span>
-            </div>
 
-            <div class="d-flex gap-4 " ng-if="match.status ==='OPEN'">
-                <i class="fa-solid fa-trash" ng-click="deleteMatch(match.id)" style="cursor:pointer;"></i>
-                <i class="fa-solid fa-pencil" ui-sref="matchForm({ matchId: match.id })"></i>
-            </div>
-            <div class="dropdown" ng-if="match.status !== 'FINISHED'">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Status
+                <i class="fa-solid fa-trash text-end" ng-click="deleteMatch(match.id)" style="cursor:pointer;" ng-if="match.status ==='OPEN' || match.status === 'PROGRESS'"></i>
+                <i class="fa-solid fa-pencil text-end" ui-sref="matchForm({ matchId: match.id })" ng-if="match.status ==='OPEN' || match.status === 'PROGRESS'"></i>
+
+            <div class="dropdown text-end" ng-if="match.status !== 'FINISHED'">
+                <button class="btn dropdown p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-gear"></i> 
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" ng-click="updateStatus('OPEN', match.id)" ng-if="match.status !== 'OPEN'">Aberta</a></li>
-                  <li><a class="dropdown-item" ng-click="updateStatus('PROGRESS', match.id)"ng-if="match.status !== 'PROGRESS'">Em Andamento</a></li>
-                  <li><a class="dropdown-item" ng-click="updateStatus('FINISHED', match.id)">Finalizada</a></li>
+                  <li><a class="dropdown-item" ng-click="updateStatus('PROGRESS', match.id)"ng-if="match.status !== 'PROGRESS'">Partida em Andamento</a></li>
+                  <li><a class="dropdown-item" ng-click="updateStatus('FINISHED', match.id)">Finalizar Partida</a></li>
                 </ul>
               </div>
         </div>
-        <hr>
-        <div class="ds-flex" style="margin-top: 10px;">      
+       
+        <div class="ds-flex" style="margin: 10px 0;">      
                 <div>
                     <div style="text-align:center;" ng-if="!match.participants.length">
                         Sem Participantes no momento!

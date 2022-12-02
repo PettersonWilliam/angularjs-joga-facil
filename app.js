@@ -27,6 +27,22 @@ myApp.config(function ($stateProvider, $httpProvider) {
         controller: "MatchsCtrl",
         onEnter: isAuthorized
     });
+
+    $stateProvider.state({
+        name: "position",
+        url: "/position",
+        templateUrl: "views/position.html",
+        controller: "positionCtrl",
+        onEnter: isAuthorized
+    });
+
+    $stateProvider.state({
+        name: "positionForm",
+        url: "/position/?{positionId}",
+        templateUrl: "views/positionForm.html",
+        controller: "positionFormCtrl",
+        onEnter: isAuthorized
+    });
 });
 
 const isAuthorized = ($state, $rootScope) => {
