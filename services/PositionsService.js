@@ -14,11 +14,14 @@ myApp.service("PositionsService", function($http) {
     const find = id  => {
         return $http.get(`http://localhost:3000/position/${id}`);
     };
-
+    const store = data => {
+        return $http.post('http://localhost:3000/position', data);
+    }
     return {
         listAll,
         deletePosition,
         edit,
-        find
+        find,
+        store
     }
 });

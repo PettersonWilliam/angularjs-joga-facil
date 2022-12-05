@@ -12,11 +12,13 @@ myApp.factory('BearerTokenInterceptor', function ($window, $q, $state, $rootScop
         response: function(response) {
             return response || $q.when(response);
         },
-        responseError: function(response) {
+        error: function(error) {
             if (response.status === 401) {
                 $state.go('login')
                 $rootScope.isLogged = false;
             }
+
+            return error;
         }
     };
 });

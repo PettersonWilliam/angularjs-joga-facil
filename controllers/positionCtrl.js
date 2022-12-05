@@ -10,7 +10,9 @@ myApp.controller("positionCtrl", ['$scope', 'PositionsService', function($scope,
     const deletePosition = id => {
         PositionsService.deletePosition(id).then(response => {
             listAll();
-        });
+        }).catch(error => {
+            alert('Erro ao deletar posição');
+        })
     };
 
     $scope.deletePosition = deletePosition;

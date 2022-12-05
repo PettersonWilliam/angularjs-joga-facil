@@ -42,7 +42,7 @@ myApp.controller('MatchsCtrl', ['$scope',  '$stateParams', '$state', '$timeout',
 
     const init = () => {
         const id = $stateParams.matchId;
-
+        console.log($stateParams);
         if (id) {
             $scope.loading = true;
 

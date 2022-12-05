@@ -1,0 +1,29 @@
+<div class="container">
+   
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <button type="button" class="btn btn-primary" style="border-radius:10px; margin-top: 10px;"ui-sref="participantForm">Adicionar Participante</button>
+                <thead>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody>
+                   <div class="row">
+                    <div class="col-md-12">
+                        <tr ng-repeat="participant in participantName">
+                            <td>{{ participant.id }}</td>
+                            <td>{{ participant.name }}</td>
+                            <td>
+                                <i class="fa-solid fa-trash text-end" ng-click="deleteParticipant(participant.id)"></i>
+                                <i class="fa-solid fa-pencil text-end" ui-sref="participantForm({ participantId: participant.id })"></i>
+                            </td>
+                        </tr>
+                    </div>
+                   </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

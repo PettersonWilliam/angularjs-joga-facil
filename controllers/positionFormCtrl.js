@@ -9,7 +9,9 @@ const editPosition = () => {
 
     PositionsService.edit(options).then(response => {
         $state.go('position');
-    });
+    }).catch(error => {
+        alert('Erro ao Editar Posição');
+    })
 };
 
 const init = () => {
@@ -24,11 +26,25 @@ const init = () => {
     }
 };
 
+const createPosition = () => {
+    const data = {
+        name: $scope.positionName
+    }
+
+    PositionsService.store(data).then(response => {
+        $state.go('position');
+    }).catch(error => {
+        alert(error.data.message);
+    });
+};
+
 const submit = () => {
     const positionId = $stateParams.positionId;
 
     if (positionId) {
         editPosition();
+    } else {
+        createPosition();
     }
 };
     init();
