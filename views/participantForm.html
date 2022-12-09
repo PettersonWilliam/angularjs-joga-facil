@@ -1,22 +1,17 @@
 <div class="container">
     <h1>Participantes</h1>
     <div class="flex">
-        <input class="col-8" type="text" ng-model="participantName" placeholder="Nome">
-        <input class="col-8" type="date" ng-model="" placeholder="Data de Nascimento">
-        <input class="col-8" type="text" ng-model="" placeholder="">
+        <input class="col-8" type="text" ng-model="participant.name" placeholder="Nome">
+        <input class="col-8" type="date" ng-model="participant.born" placeholder="Data de Nascimento">
+        <input class="col-4" type="number" ng-model="participant.number" placeholder="Número da camisa">
         <button ng-click="submit()">Salvar</button>
         <div>
-            <select style="scroll-margin-right: 10px;"class="form-select" size="9" aria-label="size 3 select example">
-                <option selected >Selecione uma Posição</option>
-                <option value="1">Goleiro</option>
-                <option value="2">Zagueiro</option>
-                <option value="3">Lateral Esquerdo</option>
-                <option value="4">Lateral Direito</option>
-                <option value="5">Volante</option>
-                <option value="6">Meio Campo</option>
-                <option value="7">Atacante</option>
-                <option value="8">Centroavante</option>
-              </select>
+            <select ng-model="positionId">
+                <option value="">Selecione uma posição</option>
+                <option ng-repeat="position in positions" ng-value="position.id">
+                 {{position.name}}
+                </option>
+            </select>
         </div>
     </div>
 </div>
