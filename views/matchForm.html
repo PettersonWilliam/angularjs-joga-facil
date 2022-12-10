@@ -26,12 +26,32 @@
                 <input class="col-8" type="number" min="1" max="4" ng-model="match.team_amount">
             </div>
             <div>
-                <select style="margin-left:628px" ng-model="participantId">
+                <!-- <select style="margin-left:628px" ng-model="participantId">
                     <option value="">Participantes</option>
                     <option ng-repeat="participant" ng-value="participant_ids">
                         {{participant.name}}
                     </option>
-                </select>
+                </select> -->
+
+
+                <!--SELECT DOS PARTICIPANTS COM CHECK BOX-->
+
+                <div class="form-group col-8">
+                    <label for="ParticipantName">Participante</label>
+                    <select ng-model="participantId" class="form-control" ng-change="addParticipant()" id="participantId">
+                        <option value="">Selecione um participante</option>
+                        <option value="{{ participant.id }}" ng-repeat="participant in participants | filter: { selected: false } ">{{ participant.name }}</option>
+                    </select>
+                </div>
+                
+                <br/>
+        
+                <table class="table" style="width: 300px">
+                    <tr ng-repeat=" participant in participants | filter: { selected: true }">
+                        <td><input type="checkbox" ng-model="participant.selected" ng-change="removeParticipant(participant)"></td>
+                        <td>{{ participant.name }}</td>
+                    </tr>
+                </table>
             </div>
             <div>
                 <button style="margin-top: 20px; "ng-click="submit()">Salvar</button>

@@ -15,7 +15,6 @@ myApp.service("MatchsService", function($http) {
         return $http.put(`http://localhost:3000/match/status/${id}`, data);
     }
     const createMatch = data => {
-        console.log(data);
         return $http.post('http://localhost:3000/match', data);
     }
     return {
