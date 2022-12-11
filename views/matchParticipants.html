@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <button type="button" class="btn btn-primary" style="border-radius:10px; margin-top: 10px;"ui-sref="matchParticipantForm">Adicionar Participante na Partida</button>
+                <thead>
+                    <th>Id</th>
+                    <th>Id da Partida</th>
+                    <th>Id do Participante</th>
+                    <th>Confirmado</th>
+                    <th>Gols</th>
+                    <th>Nota</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody>
+                   <div class="row">
+                    <div class="col-md-12">
+                        <tr ng-repeat="matchParticipant in matchParticipants">
+                            <td>{{ matchParticipant.id }}</td>
+                            <td>{{ matchParticipant.match_id }}</td>
+                            <td>{{ matchParticipant.participant_id }}</td>
+                            <td>{{ matchParticipant.is_confirmed ? 'Sim' : 'Não'}}</td>
+                            <td>{{ matchParticipant.gols }}</td>
+                            <td>{{ matchParticipant.rate }}</td>
+                            <td>
+                                <i class="fa-solid fa-trash text-end" ng-click="deleteMatchParticipant(matchParticipant.id)"></i>
+                                <i class="fa-solid fa-pencil text-end" ui-sref="matchParticipantForm({ matchParticipantId: matchParticipant.id })"></i>
+                            </td>
+                        </tr>
+                    </div>
+                   </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

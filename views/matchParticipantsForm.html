@@ -1,0 +1,31 @@
+<div class="container">
+    <h1>Participantes da Partida </h1>
+    <select ng-model="matchId">
+        <option value="">Selecione Id da partida</option>
+        <option ng-repeat="match in matchs" ng-value="match.id">
+         {{match.id}}
+        </option>
+    </select>
+    <select ng-model="participantId">
+        <option value="">Selecione o Participante</option>
+        <option ng-repeat="participant in participants" ng-value="participant.id">
+         {{participant.name}}
+        </option>
+    </select>
+    <div>
+        <p>Nota</p>
+        <input class="col-8" type="text" ng-model="rate" placeholder="">
+    </div>
+    <div>
+        <p>Gols</p>
+        <input class="col-8" type="text" ng-model="gols" placeholder="">
+    </div>
+    <select ng-model="is_confirmed">
+        <option value="">Confirme aqui</option>
+        <option value="SIM">Sim</option>
+        <option value="NÃO">Não</option>
+    </select>
+    <div class="flex">
+        <button ng-click="submit()">Salvar</button>
+    </div>
+</div>

@@ -59,6 +59,23 @@ myApp.config(function ($stateProvider, $httpProvider) {
         controller: "participantFormCtrl",
         onEnter: isAuthorized
     });
+
+    $stateProvider.state({
+        name: "matchParticipants",
+        url: "/matchParticipant",
+        templateUrl: "views/matchParticipants.html",
+        controller: "matchParticipantsCtrl",
+        onEnter: isAuthorized
+    });
+
+    $stateProvider.state({
+        name: "matchParticipantForm",
+        url: "/matchParticipant/?{matchParticipantId}",
+        templateUrl: "views/matchParticipantsForm.html",
+        controller: "matchParticipantsFormCtrl",
+        onEnter: isAuthorized
+    });
+    
 });
 
 const isAuthorized = ($state, $rootScope) => {
