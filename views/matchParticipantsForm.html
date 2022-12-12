@@ -1,5 +1,6 @@
 <div class="container">
     <h1>Participantes da Partida </h1>
+    <label for=""></label>
     <select ng-model="matchId">
         <option value="">Selecione Id da partida</option>
         <option ng-repeat="match in matchs" ng-value="match.id">
@@ -12,20 +13,20 @@
          {{participant.name}}
         </option>
     </select>
-    <div>
+    <div style="margin-top:10px;">
         <p>Nota</p>
-        <input class="col-8" type="text" ng-model="rate" placeholder="">
+        <input class="col-8" type="number" min="0" max="10" ng-model="rate" placeholder="Nota">
     </div>
-    <div>
-        <p>Gols</p>
-        <input class="col-8" type="text" ng-model="gols" placeholder="">
+    <div style="margin-top:20px;">
+        <p style="margin-right:10px">Gols</p>
+        <input style="margin-bottom: 10px;" class="col-8" type="number" min="0" ng-model="gols" placeholder="Gols">
     </div>
-    <select ng-model="is_confirmed">
+    <select style="margin-top:10px;" ng-model="is_confirmed">
         <option value="">Confirme aqui</option>
         <option value="SIM">Sim</option>
         <option value="NÃO">Não</option>
     </select>
     <div class="flex">
-        <button ng-click="submit()">Salvar</button>
+        <button style="margin-top:20px;" ng-click="submit()">Salvar</button>
     </div>
 </div>

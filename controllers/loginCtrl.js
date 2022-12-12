@@ -13,7 +13,6 @@ myApp.controller("LoginCtrl", ['$window', '$scope', '$state', '$rootScope', 'Log
 
             $rootScope.isLogged = true;
         }).catch(error => {
-            console.log(error,"passei por aqui");
             alert('Erro! Credenciais Inválidas');
         });
     }

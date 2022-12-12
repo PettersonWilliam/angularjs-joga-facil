@@ -18,22 +18,20 @@ myApp.controller("participantFormCtrl", ['$scope', '$stateParams', 'Participants
      const init = () => {
         const id = $stateParams.participantId;
 
-        if(id) {
-            ParticipantsService.find(id).then(response => {
-                $scope.participantName = response.data.name;
-                $scope.participantBorn = new Date(response.data.born);
-                $scope.positionId = response.data.position_id;
-            }).catch(error => {
-                alert('Nenhum participante encontrado');
-            });
-        }
-        //list de positions
-
         PositionsService.listAll().then(response => {
             $scope.positions = response.data.position;
+            if (id) {
+                ParticipantsService.find(id).then(response => {
+                    $scope.participant = response.data;
+                    $scope.participant.born = new Date(response.data.born); 
+                    $scope.positionId = response.data.position_id;
+                }).catch(error => {
+                    alert('Nenhum participante encontrado');
+                });
+            }
         }).catch(error => {
             alert('Erro ao listar Posição');
-        })
+        });  
     };
 
     const createParticipant = () => {
@@ -46,11 +44,7 @@ myApp.controller("participantFormCtrl", ['$scope', '$stateParams', 'Participants
         } 
         // list ParticipantIds
 
-        ParticiapntsService.list().then(response => {
-            $scope.participantIds = response.data.participant_ids
-        }).catch(error => {
-            alert('Erro ao listar o id participante');
-        })
+       
 
         ParticipantsService.createParticipant(data).then(response => {
             $state.go('participant');

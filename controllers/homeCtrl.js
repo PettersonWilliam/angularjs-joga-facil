@@ -25,7 +25,7 @@ myApp.controller('HomeCtrl', ['$scope', 'MatchsService', '$state', function ($sc
     
     const deleteMatch = id => {
         MatchsService.deleteMatch(id).then(response => {
-            if ($scope.match.status === FINISHED) {
+            if ($scope.matchs.status === 'FINISHED') {
                 alert('Não é possível deletar, Partida Finalizada!');
             }
             tableList();

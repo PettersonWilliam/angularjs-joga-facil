@@ -1,4 +1,4 @@
-myApp.controller("matchParticipantsFormCtrl", ['$scope', '$stateParams', 'MatchParticipantsService', '$state', 'MatchsService','ParticipantsService', function($scope, $stateParams, MatchParticipantsService, $state, MatchsService, ParticipantsService) {
+myApp.controller("matchParticipantsFormCtrl", ['$q', '$scope', '$stateParams', 'MatchParticipantsService', '$state', 'MatchsService','ParticipantsService', function($q, $scope, $stateParams, MatchParticipantsService, $state, MatchsService, ParticipantsService) {
     const editMatchParticipant = () => {
         const options = {
             data: {
@@ -20,31 +20,27 @@ myApp.controller("matchParticipantsFormCtrl", ['$scope', '$stateParams', 'MatchP
     
     const init = () => {
         const id = $stateParams.matchParticipantId;
-    
-        if (id) {
-            MatchParticipantsService.find(id).then(response => {
-                $scope.rate = response.data.matchParticipant.rate;
-                $scope.gols = response.data.matchParticipant.gols;
-                $scope.matchId = response.data.matchParticipant.match_id;
-                $scope.participantId = response.data.matchParticipant.participant_id;
-                $scope.is_confirmed = response.data.matchParticipant.is_confirmed ? 'SIM' : 'NÃO';
-            }).catch(error => {
-                alert('Não é possível listar Participante da Partida');
-            });
-        }
 
-        MatchsService.list().then(response => {
-            $scope.matchs = response.data.matchs;
+        const promisses = [MatchsService.list(),  ParticipantsService.list()];
+
+        $q.all(promisses).then(response => {            
+            $scope.matchs = response[0].data.matchs;
+            $scope.participants = response[1].data.participants;
+
+            if (id) {
+                MatchParticipantsService.find(id).then(response => {
+                    $scope.rate = response.data.matchParticipant.rate;
+                    $scope.gols = response.data.matchParticipant.gols;
+                    $scope.matchId = response.data.matchParticipant.match_id;
+                    $scope.participantId = response.data.matchParticipant.participant_id;
+                    $scope.is_confirmed = response.data.matchParticipant.is_confirmed ? 'SIM' : 'NÃO';
+                }).catch(error => {
+                    alert('Não é possível listar Participante da Partida');
+                });
+            }
         }).catch(error => {
-            alert('Erro ao listar Partida ');
+            alert(error.data.message);
         })
-
-        ParticipantsService.list().then(response => {
-            $scope.participants = response.data;
-        }).catch(error => {
-            alert('Erro ao listar Participante ');
-        })
-
     };
     
     const createMatchParticipant = () => {

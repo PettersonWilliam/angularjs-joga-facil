@@ -1,7 +1,7 @@
 myApp.controller("participantCtrl", ['$scope', 'ParticipantsService', function ($scope, ParticipantsService ) {
     const list = () => {
         ParticipantsService.list().then(response => {
-            $scope.participantName = response.data
+            $scope.participants = response.data.participants
         }).catch(error => {
             alert('Erro ao listar Participantes');
         });
