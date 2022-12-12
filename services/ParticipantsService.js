@@ -11,17 +11,22 @@ myApp.service("ParticipantsService", function($http) {
     const find = id => {
         return $http.get(`http://localhost:3000/participant/${id}`);
     };
-    // const list = id => {
-    //     return $http.get(`http://localhost:3000/participant/${id}`);
-    // };    
     const createParticipant = data => {
         return $http.post(`http://localhost:3000/participant`, data);
+    }
+    const listGols = () => {
+        return $http.get('http://localhost:3000/participant/top-3-gol');
+    }
+    const listRate = () => {
+        return $http.get('http://localhost:3000/participant/top-3-rate');
     }
     return {
         list,
         deleteParticipant,
         editParticipant,
         find,
-        createParticipant
+        createParticipant,
+        listGols,
+        listRate
     }
 });

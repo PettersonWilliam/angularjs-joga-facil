@@ -44,6 +44,7 @@ myApp.controller("matchParticipantsFormCtrl", ['$scope', '$stateParams', 'MatchP
         }).catch(error => {
             alert('Erro ao listar Participante ');
         })
+
     };
     
     const createMatchParticipant = () => {

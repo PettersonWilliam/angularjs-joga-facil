@@ -75,6 +75,14 @@ myApp.config(function ($stateProvider, $httpProvider) {
         controller: "matchParticipantsFormCtrl",
         onEnter: isAuthorized
     });
+
+    $stateProvider.state({
+        name: "top3",
+        url: "/top-3",
+        templateUrl: "views/top3.html",
+        controller: "top3Ctrl",
+        onEnter: isAuthorized
+    });
     
 });
 
