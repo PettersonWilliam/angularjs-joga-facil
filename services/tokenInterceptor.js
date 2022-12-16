@@ -13,7 +13,7 @@ myApp.factory('BearerTokenInterceptor', function ($window, $q, $state, $rootScop
             return response || $q.when(response);
         },
         error: function(error) {
-            if (response.status === 401) {
+            if (response.status === 401) { // 401 unUnauthorized 
                 $state.go('login')
                 $rootScope.isLogged = false;
             }

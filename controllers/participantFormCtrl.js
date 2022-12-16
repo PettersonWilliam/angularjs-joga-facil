@@ -1,8 +1,10 @@
 myApp.controller("participantFormCtrl", ['$scope', '$stateParams', 'ParticipantsService', '$state', 'PositionsService', function($scope, $stateParams, ParticipantsService, $state, PositionsService) {
+    $scope.participant = {};
+
     const editParticipant = () => {
         const options = {
             data: {
-                name: $scope.participantName
+                name: $scope.participant.name
             },
             id: $stateParams.participantId
         };
@@ -35,16 +37,12 @@ myApp.controller("participantFormCtrl", ['$scope', '$stateParams', 'Participants
     };
 
     const createParticipant = () => {
-
         const data = {
             name: $scope.participant.name,
             born: new Date($scope.participant.born),
             position_id: $scope.positionId,
-            number: $scope.participant.number 
-        } 
-        // list ParticipantIds
-
-       
+            number: $scope.participant.number
+        }; 
 
         ParticipantsService.createParticipant(data).then(response => {
             $state.go('participant');
@@ -54,6 +52,19 @@ myApp.controller("participantFormCtrl", ['$scope', '$stateParams', 'Participants
     }
 
     const submit = () => {
+
+        const data = {
+            name: $scope.participant.name,
+            born: new Date($scope.participant.born),
+            position_id: $scope.positionId,
+            number: $scope.participant.number
+        }; 
+
+        if (!data.name || !data.born || !data.position_id || !data.number ) {
+            alert('Ops! Preencha os campos abaixo');
+            return;
+        }
+
         const participantId = $stateParams.participantId;
 
         if (participantId) {

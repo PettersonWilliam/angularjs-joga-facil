@@ -30,7 +30,7 @@ const createPosition = () => {
     const data = {
         name: $scope.positionName
     }
-
+    
     PositionsService.store(data).then(response => {
         $state.go('position');
     }).catch(error => {
@@ -39,6 +39,15 @@ const createPosition = () => {
 };
 
 const submit = () => {
+
+    const data = {
+        name: $scope.positionName
+    }
+    if(!data.name) {
+        alert('Por favor preencher o campo abaixo');
+        return;
+    }
+
     const positionId = $stateParams.positionId;
 
     if (positionId) {

@@ -9,7 +9,7 @@ myApp.config(function ($stateProvider, $httpProvider) {
         url: "", // nesta url sendo ativa
         templateUrl: "views/login.html", // o html que vai ser renderizado
         controller: "LoginCtrl", // ultilizando o controller , onde fica toda nossa logica
-        onEnter: checkRedirect
+        onEnter: checkRedirect // função de de checar e redirecionar
     });
 
     $stateProvider.state({
@@ -17,7 +17,7 @@ myApp.config(function ($stateProvider, $httpProvider) {
         url: "/home",
         templateUrl: "views/home.html",
         controller: "HomeCtrl",
-        onEnter: isAuthorized
+        onEnter: isAuthorized // VERIFICA SE ESTÁ LOGADO
     });
 
     $stateProvider.state({
@@ -93,16 +93,14 @@ const isAuthorized = ($state, $rootScope) => {
       $state.go("login");
       return;
     }
-
+// $rootScope é um objeto que permite que possamos armazenar todo o escopo de nossa aplicação, e em cada aplicação só podemos usar um $rootScope.
     $rootScope.isLogged = true;
 };
-
-const checkRedirect = ($state, $rootScope) => {
+// $rootScope é um objeto que permite que possamos armazenar todo o escopo de nossa aplicação, e em cada aplicação só podemos usar um $rootScope.
+const checkRedirect = ($state, $rootScope) => { 
     const isLogged = localStorage.getItem("token");
 
-    if (!isLogged) {
-        return;
+    if (isLogged) {
+        $state.go("home");
     }
-
-    $state.go("home");
 }

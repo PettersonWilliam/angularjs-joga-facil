@@ -1,4 +1,7 @@
 myApp.controller("matchParticipantsFormCtrl", ['$q', '$scope', '$stateParams', 'MatchParticipantsService', '$state', 'MatchsService','ParticipantsService', function($q, $scope, $stateParams, MatchParticipantsService, $state, MatchsService, ParticipantsService) {
+    $scope.matchParticipant = {};
+    $scope.data = {};
+
     const editMatchParticipant = () => {
         const options = {
             data: {
@@ -39,7 +42,8 @@ myApp.controller("matchParticipantsFormCtrl", ['$q', '$scope', '$stateParams', '
                 });
             }
         }).catch(error => {
-            alert(error.data.message);
+            console.log(error);
+            alert('Erro! Algo de errado aconteceu');
         })
     };
     
@@ -49,17 +53,30 @@ myApp.controller("matchParticipantsFormCtrl", ['$q', '$scope', '$stateParams', '
             participant_id: $scope.participantId,
             is_confirmed: $scope.is_confirmed === 'SIM' ? true : false,
             gols: $scope.gols,
-            rate: $scope.rate,
+            rate: $scope.rate
         }
-    
+
+        
         MatchParticipantsService.store(data).then(response => {
             $state.go('matchParticipants');
         }).catch(error => {
-            alert(error.data.message);
+            alert(error.data.message); 
         });
     };
     
     const submit = () => {
+        const data = {
+            match_id: $scope.matchId,
+            participant_id: $scope.participantId,
+            is_confirmed: $scope.is_confirmed === 'SIM' ? true : false,
+            gols: $scope.gols,
+            rate: $scope.rate
+        }
+
+        if (!data.match_id || !data.participant_id || (data.rate !== 0 && !data.rate ) || (data.gols !== 0 && !data.gols) || !data.is_confirmed ) {
+            alert('Por favor preencha os campos em branco');
+            return;
+        }
         const matchParticipantId = $stateParams.matchParticipantId;
     
         if (matchParticipantId) {

@@ -1,5 +1,14 @@
 myApp.controller('HomeCtrl', ['$scope', 'MatchsService', '$state', function ($scope, MatchsService ,$state) {
     const tableList = () => {
+        //swit alert -- 
+        // swal ( " Olá mundo! " ) ;
+        // Swal.fire({
+        //     title: 'Error!',
+        //     text: 'Do you want to continue',
+        //     icon: 'error',
+        //     confirmButtonText: 'Cool'
+        //   })
+
         MatchsService.list().then(response => {
             const matches = response.data.matchs.map(match => {
                 if (match.status === 'OPEN') {

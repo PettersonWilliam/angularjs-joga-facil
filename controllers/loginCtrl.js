@@ -5,6 +5,21 @@ myApp.controller("LoginCtrl", ['$window', '$scope', '$state', '$rootScope', 'Log
             password: $scope.password
         };
 
+        if(!data.email) {
+            alert('Por favor inserir o email');
+            return;
+        }
+        
+        if(!data.password) {
+            alert('Por favor inserira sua senha');
+            return;
+        }
+        if(data.password.length < 6) {
+            alert('A senha deve conter no mínimo 6 caracteres');
+            return;
+        }
+
+
         LoginService.sign(data).then(response => {
             const token = response.data.token;
 
@@ -13,7 +28,7 @@ myApp.controller("LoginCtrl", ['$window', '$scope', '$state', '$rootScope', 'Log
 
             $rootScope.isLogged = true;
         }).catch(error => {
-            alert('Erro! Credenciais Inválidas');
+            alert('Credenciais Inválidas');
         });
     }
     

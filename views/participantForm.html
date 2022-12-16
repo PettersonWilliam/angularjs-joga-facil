@@ -3,7 +3,7 @@
     <div class="flex">
         <input class="col-8" type="text" ng-model="participant.name" placeholder="Nome">
         <input class="col-8" type="date" ng-model="participant.born" placeholder="Data de Nascimento">
-        <input class="col-4" type="number" ng-model="participant.number" placeholder="Número da camisa">
+        <input class="col-4" type="number" min="1" ng-model="participant.number" placeholder="Número da camisa">
         <button ng-click="submit()">Salvar</button>
         <div>
             <select ng-model="positionId">
